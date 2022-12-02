@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% block title %}Информация о Задаче{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a href="{% url 'update_task' task.pk %}" class="nav-link text-light">Редактировать продукт</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'delete_task' task.pk %}" class="nav-link text-light">Удалить продукт</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="card my-4">
+        <div class="card-header">
+            <h5 class="card-title">Подробная информация о Задаче</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><b class="fs-4">Название: </b>{{ task.title }}</p>
+            <p class="card-text"><b class="fs-4">Статус: </b>
+                {% if not task.status == None %}
+                    {{ task.status}}
+                {% else %}
+                    <span>Нет</span>
+                {% endif %}
+            </p>
+            <p class="card-text"><b class="fs-4">Типы:</b></p>
+                {% for types in task.type.all %}
+                    {{ types.title }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    <p>Типов нет</p>
+                {% endfor %}
+            <p><b class="fs-4">Описание: </b></p>
+            <p class="card-text">{{ task.content|linebreaksbr }}</p>
+            <p class="card-text"><b class="fs-4">Дата: </b>{{ task.created_at|date:"d-m-Y" }}</p>
+        </div>
+    </div>
+    <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
+{% endblock %}
