@@ -1,11 +1,11 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import widgets
-from webapp.models import IssueModel
+from webapp.models import IssueModel, ProjectModel
 import re
 
 
-class TaskForm(forms.ModelForm):
+class TaskWithProjectForm(forms.ModelForm):
     class Meta:
         model = IssueModel
         fields = ['title', 'status', 'type', 'content']
@@ -45,3 +45,32 @@ class TaskForm(forms.ModelForm):
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=50, required=False,
                              widget=widgets.TextInput(attrs={'class': 'form-control mb-3 w-50 d-inline-block', 'placeholder': 'Название задачи'}))
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModel
+        fields = ['title', 'content', 'created_at', 'updated_at']
+        widgets = {
+            'title': widgets.TextInput(attrs={'class': 'form-control mb-3',
+                                              'placeholder': 'Название проекта'}),
+            'created_at': widgets.DateInput(attrs={'class': 'form-control mb-3'}),
+            'updated_at': widgets.DateInput(attrs={'class': 'form-control mb-3'}),
+            'content': widgets.Textarea(attrs={'class': 'form-control mb-3', 'rows': 6,
+                                               'placeholder': 'Основной Текст'})
+        }
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = IssueModel
+        fields = ['title', 'project', 'status', 'type', 'content']
+        widgets = {
+            'title': widgets.TextInput(attrs={'class': 'form-control mb-3',
+                                              'placeholder': 'Название задачи'}),
+            'status': widgets.Select(attrs={'class': 'form-control mb-3'}),
+            'project': widgets.Select(attrs={'class': 'form-control mb-3'}),
+            'type': widgets.CheckboxSelectMultiple,
+            'content': widgets.Textarea(attrs={'class': 'form-control mb-3', 'rows': 6,
+                                               'placeholder': 'Основной Текст'})
+        }
