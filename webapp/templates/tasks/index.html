@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block nav %}
     <li class="nav-item">
+        <a href="{% url 'projects' %}" class="nav-link text-light">Все Проекты</a>
+    </li>
+    <li class="nav-item">
         <a href="{% url 'create_task' %}" class="nav-link text-light">Добавить задачу</a>
     </li>
 {% endblock %}

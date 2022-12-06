@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% block title %}Информация о Задаче{% endblock %}
 {% block nav %}
     <li class="nav-item">
@@ -33,5 +33,5 @@
             <p class="card-text"><b class="fs-4">Дата: </b>{{ task.created_at|date:"d-m-Y" }}</p>
         </div>
     </div>
-    <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
+    <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>
 {% endblock %}
