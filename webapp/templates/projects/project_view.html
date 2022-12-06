@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Информация о Проекте{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a href="{% url 'create_task_with_project' project.pk %}" class="nav-link text-light">Создать задачу</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link text-light">Редактировать продукт</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link text-light">Удалить продукт</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="card my-4">
+        <div class="card-header">
+            <h5 class="card-title">Подробная информация о проекте</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><b class="fs-4">Название: </b>{{ project.title }}</p>
+            <p><b class="fs-4">Описание: </b></p>
+            <p class="card-text">{{ project.content|linebreaksbr }}</p>
+            <p class="card-text"><b class="fs-4">Дата создания: </b>{{ project.created_at|date:"d-m-Y" }}</p>
+            {% if project.updated_at %}
+            <p class="card-text"><b class="fs-4">Дата изменения: </b>{{ project.updated_at|date:"d-m-Y" }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row ms-xl-5">
+            <h5 class="card-title text-center mb-5">Задачи относящиеся к проекту: "{{ project.title }}"</h5>
+        {% for task in tasks %}
+            <div class="col-4 mb-3">
+                <div class="card h-100" style="width: 18rem;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href=" {% url 'task_view' task.pk %}" class="link-success">{{ task.title }}</a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><b>Статус: </b>
+                            {% if not task.status == None %}
+                                {{ task.status}}
+                            {% else %}
+                                <span>Нет</span>
+                            {% endif %}
+                        </h6>
+                        <h6 class="card-subtitle mb-2 text-muted"><b>Типы: </b>
+                            {% for types in task.type.all %}
+                                {{ types.title }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                <p>Типов нет</p>
+                            {% endfor %}</h6>
+                        <a href=" {% url 'task_view' task.pk %}"
+                           class="btn btn-primary btn-sm mt-auto d-inline-block w-50">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <h1>Задач нет!</h1>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
+    <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>
+{% endblock %}

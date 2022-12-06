@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block nav %}
+    <li class="nav-item">
+        <a href="{% url 'tasks' %}" class="nav-link text-light">Все задачи</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'create_project' %}" class="nav-link text-light">Создать проект</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1 class="text-center my-4">Список Проектов</h1>
+    {% include 'partial/search.html' %}
+    <div class="row ms-xl-5">
+        {% for project in projects %}
+            <div class="col-4 mb-3">
+                <div class="card h-100" style="width: 18rem;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href="{% url 'project_view' project.pk %}" class="link-success">{{ project.title }}</a>
+                        </h5>
+                        <h5 class="card-title">
+                            {{ project.created_at }}
+                        </h5>
+                        <a href="{% url 'project_view' project.pk %}"
+                           class="btn btn-primary btn-sm mt-auto d-inline-block w-50">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <h1>Проектов нет!</h1>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
+{% endblock %}
