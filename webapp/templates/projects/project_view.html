@@ -5,10 +5,10 @@
         <a href="{% url 'create_task_with_project' project.pk %}" class="nav-link text-light">Создать задачу</a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link text-light">Редактировать продукт</a>
+        <a href="{% url 'update_project' project.pk %}" class="nav-link text-light">Редактировать проект</a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link text-light">Удалить продукт</a>
+        <a href="{% url 'delete_project' project.pk %}" class="nav-link text-light">Удалить продукт</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -56,8 +56,29 @@
         {% empty %}
             <h1>Задач нет!</h1>
         {% endfor %}
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
+        {% if page_obj.has_other_pages %}
+            <div style="margin: 0 25%">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for page in page_obj.paginator.page_range %}
+                            {% if page_obj.number == page %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                </li>
+                            {% elif page > page_obj.number|add:-3 and page < page_obj.number|add:+3 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
         {% endif %}
     </div>
     <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>

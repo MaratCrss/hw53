@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.urls import reverse_lazy
 from django.utils.http import urlencode
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from webapp.forms import SearchForm, ProjectForm
 from webapp.models import ProjectModel
@@ -53,10 +54,28 @@ class ProjectView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tasks'] = self.object.tasks.order_by('-created_at')
+        tasks = self.object.tasks.order_by('-created_at')
+        paginator = Paginator(tasks, 3)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['tasks'] = page_obj.object_list
+        context['page_obj'] = page_obj
         return context
 
 
 class CreateProject(CreateView):
     form_class = ProjectForm
     template_name = 'projects/create_project.html'
+
+
+class UpdateProject(UpdateView):
+    form_class = ProjectForm
+    template_name = 'projects/update_project.html'
+    model = ProjectModel
+
+
+class DeleteProject(DeleteView):
+    model = ProjectModel
+    context_object_name = 'project'
+    template_name = 'projects/delete_project.html'
+    success_url = reverse_lazy('projects')
