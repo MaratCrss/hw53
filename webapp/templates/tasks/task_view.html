@@ -5,7 +5,7 @@
         <a href="{% url 'update_task' task.pk %}" class="nav-link text-light">Редактировать продукт</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'delete_task' task.pk %}" class="nav-link text-light">Удалить продукт</a>
+        <a href="{% url 'delete_task' task.pk %}" class="nav-link text-light">Удалить задачу</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -34,4 +34,5 @@
         </div>
     </div>
     <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>
+    <a href="{% url 'project_view' task.project.pk %}" class="btn btn-primary">Назад</a>
 {% endblock %}
