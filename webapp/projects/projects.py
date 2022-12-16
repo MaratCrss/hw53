@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlencode
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -12,7 +14,6 @@ class ProjectsView(ListView):
     model = ProjectModel
     template_name = 'projects/projects_list.html'
     context_object_name = 'projects'
-    ordering = ('-created_at',)
     paginate_by = 5
     paginate_orphans = 2
     form = None
@@ -63,19 +64,19 @@ class ProjectView(DetailView):
         return context
 
 
-class CreateProject(CreateView):
+class CreateProject(LoginRequiredMixin, CreateView):
     form_class = ProjectForm
     template_name = 'projects/create_project.html'
 
 
-class UpdateProject(UpdateView):
+class UpdateProject(LoginRequiredMixin,UpdateView):
     form_class = ProjectForm
     template_name = 'projects/update_project.html'
     model = ProjectModel
 
 
-class DeleteProject(DeleteView):
+class DeleteProject(LoginRequiredMixin, DeleteView):
     model = ProjectModel
     context_object_name = 'project'
     template_name = 'projects/delete_project.html'
-    success_url = reverse_lazy('projects')
+    success_url = reverse_lazy('webapp:projects')
