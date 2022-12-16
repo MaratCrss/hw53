@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Информация о Проекте{% endblock %}
 {% block nav %}
-    <li class="nav-item">
-        <a href="{% url 'create_task_with_project' project.pk %}" class="nav-link text-light">Создать задачу</a>
-    </li>
-    <li class="nav-item">
-        <a href="{% url 'update_project' project.pk %}" class="nav-link text-light">Редактировать проект</a>
-    </li>
-    <li class="nav-item">
-        <a href="{% url 'delete_project' project.pk %}" class="nav-link text-light">Удалить продукт</a>
-    </li>
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'webapp:create_task_with_project' project.pk %}" class="nav-link text-light">Создать задачу</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'webapp:update_project' project.pk %}" class="nav-link text-light">Редактировать проект</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'webapp:delete_project' project.pk %}" class="nav-link text-light">Удалить продукт</a>
+        </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="card my-4">
@@ -33,7 +35,7 @@
                 <div class="card h-100" style="width: 18rem;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
-                            <a href=" {% url 'task_view' task.pk %}" class="link-success">{{ task.title }}</a>
+                            <a href=" {% url 'webapp:task_view' task.pk %}" class="link-success">{{ task.title }}</a>
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"><b>Статус: </b>
                             {% if not task.status == None %}
@@ -48,7 +50,7 @@
                             {% empty %}
                                 <p>Типов нет</p>
                             {% endfor %}</h6>
-                        <a href=" {% url 'task_view' task.pk %}"
+                        <a href=" {% url 'webapp:task_view' task.pk %}"
                            class="btn btn-primary btn-sm mt-auto d-inline-block w-50">Подробнее</a>
                     </div>
                 </div>
@@ -81,5 +83,5 @@
             </div>
         {% endif %}
     </div>
-    <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>
+    <a href="{% url 'webapp:projects' %}" class="btn btn-primary">На главную</a>
 {% endblock %}

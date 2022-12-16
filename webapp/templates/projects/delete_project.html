@@ -5,6 +5,6 @@
         {% csrf_token %}
         <h2>Вы уверены, что хотите удалить этот проект: "{{ project.title }}"</h2>
         <button type="submit" class=" btn btn-primary d-inline-block px-5">Да</button>
-        <a href="{% url 'project_view' project.pk %}" class="btn btn-primary d-inline-block px-5">Нет</a>
+        <a href="{% url 'webapp:project_view' project.pk %}" class="btn btn-primary d-inline-block px-5">Нет</a>
     </form>
 {% endblock %}
