@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block nav %}
     <li class="nav-item">
-        <a href="{% url 'projects' %}" class="nav-link text-light">Все Проекты</a>
+        <a href="{% url 'webapp:projects' %}" class="nav-link text-light">Все Проекты</a>
     </li>
-    <li class="nav-item">
-        <a href="{% url 'create_task' %}" class="nav-link text-light">Добавить задачу</a>
-    </li>
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'webapp:create_task' %}" class="nav-link text-light">Добавить задачу</a>
+        </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <h1 class="text-center my-4">Список Трекер Задач</h1>
@@ -16,7 +18,7 @@
                 <div class="card h-100" style="width: 18rem;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
-                            <a href=" {% url 'task_view' task.pk %}" class="link-success">{{ task.title }}</a>
+                            <a href=" {% url 'webapp:task_view' task.pk %}" class="link-success">{{ task.title }}</a>
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"><b>Статус: </b>
                             {% if not task.status == None %}
@@ -31,7 +33,7 @@
                             {% empty %}
                                 <p>Типов нет</p>
                             {% endfor %}</h6>
-                        <a href=" {% url 'task_view' task.pk %}"
+                        <a href=" {% url 'webapp:task_view' task.pk %}"
                            class="btn btn-primary btn-sm mt-auto d-inline-block w-50">Подробнее</a>
                     </div>
                 </div>

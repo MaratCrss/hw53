@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Информация о Задаче{% endblock %}
 {% block nav %}
-    <li class="nav-item">
-        <a href="{% url 'update_task' task.pk %}" class="nav-link text-light">Редактировать продукт</a>
-    </li>
-    <li class="nav-item">
-        <a href="{% url 'delete_task' task.pk %}" class="nav-link text-light">Удалить задачу</a>
-    </li>
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'webapp:update_task' task.pk %}" class="nav-link text-light">Редактировать задачу</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'webapp:delete_task' task.pk %}" class="nav-link text-light">Удалить задачу</a>
+        </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="card my-4">
@@ -33,6 +35,6 @@
             <p class="card-text"><b class="fs-4">Дата: </b>{{ task.created_at|date:"d-m-Y" }}</p>
         </div>
     </div>
-    <a href="{% url 'projects' %}" class="btn btn-primary">На главную</a>
-    <a href="{% url 'project_view' task.project.pk %}" class="btn btn-primary">Назад</a>
+    <a href="{% url 'webapp:projects' %}" class="btn btn-primary">На главную</a>
+    <a href="{% url 'webapp:project_view' task.project.pk %}" class="btn btn-primary">Назад</a>
 {% endblock %}
