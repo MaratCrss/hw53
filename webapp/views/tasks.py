@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -56,12 +57,12 @@ class TaskView(DetailView):
         return context
 
 
-class CreateTask(CreateView):
+class CreateTask(LoginRequiredMixin, CreateView):
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
 
 
-class CreateTaskWithProject(CreateView):
+class CreateTaskWithProject(LoginRequiredMixin, CreateView):
     form_class = TaskWithProjectForm
     template_name = 'tasks/create_task_with_project.html'
 
@@ -71,19 +72,19 @@ class CreateTaskWithProject(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.project.pk})
 
 
-class UpdateTask(UpdateView):
+class UpdateTask(LoginRequiredMixin, UpdateView):
     form_class = TaskForm
     template_name = 'tasks/update_task.html'
     model = IssueModel
 
 
-class DeleteTask(DeleteView):
+class DeleteTask(LoginRequiredMixin, DeleteView):
     model = IssueModel
     context_object_name = 'task'
     template_name = 'tasks/delete_task.html'
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.project.pk})
