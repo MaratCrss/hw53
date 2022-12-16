@@ -48,7 +48,7 @@ class IssueModel(BaseModel):
         return f"{self.pk}, {self.title}, {self.content}, {self.status}"
 
     def get_absolute_url(self):
-        return reverse('task_view', kwargs={'pk': self.pk})
+        return reverse('webapp:task_view', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = "issue"
@@ -66,7 +66,7 @@ class ProjectModel(models.Model):
         return f"{self.title}"
 
     def get_absolute_url(self):
-        return reverse('project_view', kwargs={'pk': self.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = "products"
