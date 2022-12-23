@@ -26,17 +26,17 @@
                     {% endblock %}
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link text-light">Выйти</a>
+                            <a href="{% url 'accounts:logout' %}" class="nav-link text-light">Выйти</a>
                         </li>
                         <li class="nav-item ms-auto">
                             <span class="nav-link text-light">Здравствуйте: {{ user.username }}</span>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="nav-link text-light">Войти</a>
+                            <a href="{% url 'accounts:login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% else %}?next={{ request.get_full_path }}{% endif %}" class="nav-link text-light">Войти</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'accounts:create_user' %}?next={{ request.get_full_path }}" class="nav-link text-light">Регистрация</a>
+                            <a href="{% url 'accounts:create_user' %}{% if request.GET.next %}?next={{ request.GET.next }}{% else %}?next={{ request.get_full_path }}{% endif %}" class="nav-link text-light">Регистрация</a>
                         </li>
                     {% endif %}
                 </ul>

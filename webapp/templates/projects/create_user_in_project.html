@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Добавление пользователя в проект{% endblock %}
+{% block content %}
+    <h1 class="my-3">Добавить пользователя в проект</h1>
+    <form action="" class="form-control mb-4" method="post">
+        {% csrf_token %}
+        <select name="user_project" class="form-control mb-4">
+            {% for user in users%}
+                <option value="{{ user.pk}}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="project_id" value="{{ project.pk }}">
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+    <a href="{% url 'webapp:project_view' project.pk %}" class="btn btn-primary">Назад</a>
+{% endblock %}
