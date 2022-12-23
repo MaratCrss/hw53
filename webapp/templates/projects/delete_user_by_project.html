@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Удаление пользователя{% endblock %}
+{% block content %}
+    <form action="" method="POST" class="text-center pt-5 mt-5">
+        {% csrf_token %}
+        <h2>Вы уверены, что хотите удалить этого пользователя: "{{ user}}"</h2>
+        <button type="submit" class=" btn btn-primary d-inline-block px-5">Да</button>
+        <a href="{% url 'webapp:project_view' project.pk %}" class="btn btn-primary d-inline-block px-5">Нет</a>
+    </form>
+{% endblock %}

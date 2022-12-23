@@ -3,7 +3,7 @@
     <li class="nav-item">
         <a href="{% url 'webapp:tasks' %}" class="nav-link text-light">Все задачи</a>
     </li>
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and perms.webapp.add_projectmodel %}
         <li class="nav-item">
             <a href="{% url 'webapp:create_project' %}" class="nav-link text-light">Создать проект</a>
         </li>
