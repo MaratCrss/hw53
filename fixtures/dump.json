@@ -195,21 +195,6 @@
 },
 {
   "model": "webapp.issuemodel",
-  "pk": 11,
-  "fields": {
-    "created_at": "2022-12-06T12:02:18.017Z",
-    "updated_at": "2022-12-06T12:02:18.017Z",
-    "title": "sdfsnaf;sdgnd;salgkndsa;gdsg",
-    "content": "asdfsajnkmsasadgnsagsangsagn",
-    "status": 4,
-    "project": 2,
-    "type": [
-      1
-    ]
-  }
-},
-{
-  "model": "webapp.issuemodel",
   "pk": 12,
   "fields": {
     "created_at": "2022-12-06T12:02:41.908Z",
@@ -235,6 +220,21 @@
     "project": 4,
     "type": [
       1
+    ]
+  }
+},
+{
+  "model": "webapp.issuemodel",
+  "pk": 14,
+  "fields": {
+    "created_at": "2022-12-20T07:42:00.022Z",
+    "updated_at": "2022-12-20T07:42:40.163Z",
+    "title": "ЛЩлфщалфщзалффафыаф",
+    "content": "фвалфвтаыдлоатывдлотввдылтп",
+    "status": 3,
+    "project": 2,
+    "type": [
+      2
     ]
   }
 },
@@ -319,21 +319,11 @@
   }
 },
 {
-  "model": "webapp.projectmodel",
-  "pk": 9,
-  "fields": {
-    "title": "aSDA<MDA<dma,dsm",
-    "content": "sadgns;gna;slgnsadlg",
-    "created_at": "2022-12-12",
-    "updated_at": null
-  }
-},
-{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$aQNjQHpx4AagPVQgj6mNue$JGpNnxno6ip1ZwRW9qB2UmHXUiih/ObB5XmDZBgqFcc=",
-    "last_login": "2022-12-06T11:43:14.147Z",
+    "last_login": "2022-12-16T11:33:33.807Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -342,6 +332,42 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2022-12-06T11:35:43.369Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$XO6i3JGrt5yI66TfsZEeVm$cqu4X7Xz9uaP2LTENHCc8JtKJhUIb+RVYTDnoseXv7E=",
+    "last_login": "2022-12-20T12:02:54.252Z",
+    "is_superuser": false,
+    "username": "Marat",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-12-16T11:16:34.406Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$Maih83NBB1OtcjZZK8ObjC$mF1EaQPv6Uvq76ySwyfa/0nsFEcD5KxllJyMkzlWo1A=",
+    "last_login": "2022-12-20T11:55:31.825Z",
+    "is_superuser": false,
+    "username": "Mrt12345",
+    "first_name": "Marat",
+    "last_name": "Marat",
+    "email": "asaad@gmial.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-12-20T11:55:31.548Z",
     "groups": [],
     "user_permissions": []
   }

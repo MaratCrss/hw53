@@ -21,7 +21,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'content', 'created_at', 'updated_at']
     list_display_links = ['title']
     list_filter = ['title']
-    fields = ['title', 'content', 'created_at', 'updated_at']
+    fields = ['title', 'content', 'users', 'created_at', 'updated_at']
 
 
 class TypeAdmin(admin.ModelAdmin):

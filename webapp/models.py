@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -59,6 +60,7 @@ class IssueModel(BaseModel):
 class ProjectModel(models.Model):
     title = models.CharField(max_length=50, verbose_name="Краткое описание")
     content = models.TextField(max_length=1000, verbose_name="Контент")
+    users = models.ManyToManyField(get_user_model(), related_name='projects', verbose_name='Юзер')
     created_at = models.DateField(verbose_name='Дата создания')
     updated_at = models.DateField(null=True, blank=True, verbose_name='Дата изменения')
 
@@ -70,5 +72,9 @@ class ProjectModel(models.Model):
 
     class Meta:
         db_table = "products"
-        verbose_name = "Продукт"
-        verbose_name_plural = "Продукты"
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
+        permissions = [
+            ('can_add_users_to_the_project', 'Может добавлять пользователей в проект'),
+            ('can_delete_users_to_the_project', 'Может удалять пользователей с проекта')
+        ]
