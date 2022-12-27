@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+    <div class="row ms-xl-5 mt-5">
+        <h1 style="text-align: center; margin: 0 0 40px 0">Список всех пользователей</h1>
+        {% for user in users %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user }}</h5>
+                    </div>
+                    <a href="{% url 'accounts:user_profile' user.pk %}" class="card-link btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        {% empty %}
+            <h1>Пользователей нет!</h1>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
+
+{% endblock %}
