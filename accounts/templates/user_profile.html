@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block nav %}
+    <li class="nav-link">
+        <a class="nav-link text-light d-inline" href="#">Редактировать</a>
+    </li>
+    <li class="nav-link">
+        <a class="nav-link text-light d-inline" href="#">Сменить пароль</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="card flex-row my-4">
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" class="card-img-top" style="width: 180px" alt="...">
+        {% else %}
+            <img src="https://klike.net/uploads/posts/2019-03/1551511862_48.jpg" class="card-img-top" style="width: 180px" alt="...">
+        {% endif %}
+        <div class="card-body ms-5">
+        <h5 class="card-title mb-3">Имя пользователя: <span style="font-style: italic; font-size: 30px">{{ user.username }}</span></h5>
+        {% if user.profile.github is not null %}
+            <h6 class="card-subtitle mb-3 text-muted">Ссылка на github: {{ user.profile.github }}</h6>
+        {% endif %}
+        {% if user.profile.about is not null %}
+            <h6 class="card-subtitle mb-3 text-muted">О себе: {{ user.profile.about }}</h6>
+        {% endif %}
+        {% if user.first_name %}
+            <h6 class="card-subtitle mb-3 text-muted">Имя: {{ user.first_name }}</h6>
+        {% endif %}
+        {% if user.last_name %}
+            <h6 class="card-subtitle mb-3 text-muted">Фамилия: {{ user.last_name }}</h6>
+        {% endif %}
+        <h6 class="card-subtitle mb-3 text-muted">Почта: {{ user.email }}</h6>
+        </div>
+    </div>
+
+    {% include "partial/projects_list_partial.html" %}
+
+{% endblock %}
