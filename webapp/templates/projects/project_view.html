@@ -35,7 +35,7 @@
                 <b>Пользователи: </b>
                 {% for user in project.users.all %}
                     <p class="p-0 m-0">
-                        {{ user }}
+                        <a href="{% url 'accounts:user_profile' user.pk %}">{{ user }}</a>
                         {% if perms.webapp.can_delete_users_to_the_project and request.user in project.users.all or request.user.is_superuser %}
                             <a href="{% url 'webapp:delete_user' project.pk user.pk %}" class="ms-4 btn btn-danger btn-sm py-0 px-1">Удалить</a>
                         {% endif %}

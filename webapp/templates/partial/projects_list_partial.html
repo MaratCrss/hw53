@@ -1,0 +1,18 @@
+<div class="row ms-xl-5">
+    {% for project in projects %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p>{{ project.created_at }}</p>
+                </div>
+                <a href="{% url 'webapp:project_view' project.pk %}" class="card-link btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    {% empty %}
+        <h1>Проектов нет!</h1>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+</div>
