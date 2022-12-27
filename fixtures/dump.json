@@ -254,6 +254,21 @@
   }
 },
 {
+  "model": "webapp.issuemodel",
+  "pk": 18,
+  "fields": {
+    "created_at": "2022-12-23T12:24:33.737Z",
+    "updated_at": "2022-12-23T12:24:33.737Z",
+    "title": "asdadadadadsad",
+    "content": "asdadskanakdjnsafkjasfnsalkfjabfalkjfbskljfbasklfjsbklfa",
+    "status": 1,
+    "project": 10,
+    "type": [
+      2
+    ]
+  }
+},
+{
   "model": "webapp.projectmodel",
   "pk": 1,
   "fields": {
