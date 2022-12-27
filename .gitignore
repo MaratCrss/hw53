@@ -9,13 +9,13 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-.idea
-db.sqlite3
-db.sqlite3-journal
 build/
 develop-eggs/
+.idea/
+.vscode/
 dist/
 downloads/
+uploads/
 eggs/
 .eggs/
 lib/
@@ -140,4 +140,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-

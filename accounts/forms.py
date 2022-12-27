@@ -11,8 +11,9 @@ class MyUserCreationForm(UserCreationForm):
     def clean(self):
         cleaned_data = super().clean()
         first_name = cleaned_data.get("first_name")
-        if first_name == '':
-            raise forms.ValidationError('Имя не должно быть пустым!!!')
+        last_name = cleaned_data.get("last_name")
+        if first_name == '' and last_name == '':
+            raise forms.ValidationError('Имя или фамилия не должно быть пустым!!!')
 
     class Meta(UserCreationForm.Meta):
         model = User
