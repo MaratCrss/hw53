@@ -115,7 +115,7 @@ class DeleteUserByProject(PermissionRequiredMixin, View):
         return redirect('webapp:project_view', pk=project.pk)
 
 
-class CreateUserProject(PermissionRequiredMixin ,CreateView):
+class CreateUserProject(PermissionRequiredMixin, CreateView):
 
     def get(self, request, *args, **kwargs):
         project = get_object_or_404(ProjectModel, pk=self.kwargs.get('pk'))
